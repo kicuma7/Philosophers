@@ -6,11 +6,18 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 06:59:34 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/08 07:03:31 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/08 07:24:33 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+static bool	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (true);
+	return (false);
+}
 
 bool	ft_isnumeric_str(char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 05:36:35 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/08 07:03:19 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/08 07:18:51 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ typedef struct  s_common_data
 
 bool	    ft_isnumeric_str(char *str);
 long int	ft_atol(const char *nptr);
+bool        validate_args(char **argv, int argc, t_common_data *philo_data_init);
 
 #endif

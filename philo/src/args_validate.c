@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 05:38:09 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/08 07:15:24 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/08 07:49:06 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool    validate_args(char **argv, int argc, t_common_data *philo_data_init)
     if (argc != 5 && argc != 6)
         return (false);
     i = 0;
-    while (argv[i])
+    while (++i < argc)
     {
         args_long = ft_atol(argv[i]);
         if ((!ft_isnumeric_str(argv[i])) || args_long > INT_MAX || 
