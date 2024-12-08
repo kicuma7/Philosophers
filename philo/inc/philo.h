@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 05:36:35 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/08 07:18:51 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/08 08:17:03 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ typedef struct  s_common_data
     int     meal_nbr;
     bool    infinit_mode;
 }           t_common_data;
+
+typedef struct  s_philo
+{
+    int             philo_id;
+    t_common_data   common_data;
+    pthread_t       thread;
+}                   t_philo;
 
 bool	    ft_isnumeric_str(char *str);
 long int	ft_atol(const char *nptr);
