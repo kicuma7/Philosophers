@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_time_print.c                                 :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 22:44:05 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/08 23:11:24 by jquicuma         ###   ########.fr       */
+/*   Created: 2024/12/10 07:47:42 by jquicuma          #+#    #+#             */
+/*   Updated: 2024/12/10 07:51:08 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/philo.h"
+#ifndef PHILO_H
+# define PHILO_H
 
-long    get_time_ms(void)
+# include <stdbool.h>
+# include <pthread.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+
+# include "ansi_colors.h"
+
+typedef struct  s_philo_data
 {
-	struct timeval  currentTime;
-    
-	gettimeofday(&currentTime, NULL);
-	return currentTime.tv_sec * (int)1e6 + currentTime.tv_usec;
-}
+    pthread_t       thread;
+    int             id;
+    pthread_mutex_t *left_fork;
+    pthread_mutex_t *right_fork;
+}                   t_philo_data;
+
+#endif

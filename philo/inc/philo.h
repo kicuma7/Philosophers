@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 05:36:35 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/08 23:09:18 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/09 06:51:02 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ long int	ft_atol(const char *nptr);
 bool        validate_args(char **argv, int argc, t_common_data *philo_data_init);
 long        get_time_ms(void);
 void	    clean_print(char *str, pthread_mutex_t *mutex);
+int	        ft_strcmp(const char *s1, const char *s2);
 
 #endif

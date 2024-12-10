@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 06:59:34 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/08 07:24:33 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/09 06:50:36 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,32 @@ long int	ft_atol(const char *nptr)
 		i++;
 	}
 	return (number * signal);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t			i;
+	unsigned char	*s_s1;
+	unsigned char	*s_s2;
+
+	if (!s1 || !s2)
+		return (-1);
+	i = 0;
+	s_s1 = (unsigned char *)s1;
+	s_s2 = (unsigned char *)s2;
+	while (s_s1[i] || s_s2[i])
+	{
+		if (s_s1[i] != s_s2[i])
+			return (s_s1[i] - s_s2[i]);
+		i++;
+	}
+	return (0);
+}
+
+long    get_time_ms(void)
+{
+	struct timeval  currentTime;
+    
+	gettimeofday(&currentTime, NULL);
+	return currentTime.tv_sec * (int)1e6 + currentTime.tv_usec;
 }
