@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 06:59:34 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/09 06:50:36 by jquicuma         ###   ########.fr       */
+/*   Created: 2024/12/10 16:23:54 by jquicuma          #+#    #+#             */
+/*   Updated: 2024/12/10 16:25:24 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,4 @@ int	ft_strcmp(const char *s1, const char *s2)
 		i++;
 	}
 	return (0);
-}
-
-long    get_time_ms(void)
-{
-	struct timeval  currentTime;
-    
-	gettimeofday(&currentTime, NULL);
-	return currentTime.tv_sec * (int)1e6 + currentTime.tv_usec;
 }
