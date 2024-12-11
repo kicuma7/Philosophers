@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:51:29 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/11 12:52:18 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:27:24 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ void    init_philos(t_philo **philos, t_data *data)
     *philos = malloc(sizeof(t_philo) * data->philo_nbr);
     data->forks = malloc(sizeof(pthread_mutex_t) * data->philo_nbr);
     while (i < data->philo_nbr)
+        pthread_mutex_init(&data->forks[i++], NULL);
+    i = 0;
+    while (i < data->philo_nbr)
     {
         (*philos)[i].id = i + 1;
         (*philos)[i].data = data;
         (*philos)[i].left_fork = &data->forks[i];
-        (*philos)[i].left_fork = &data->forks[(i + 1) % data->philo_nbr];
+        (*philos)[i].right_fork = &data->forks[(i + 1) % data->philo_nbr];
         i++;
     }
 }
@@ -54,6 +57,7 @@ static void    *routine(void *philos)
     t_philo philo;
 
     philo = *(t_philo *)philos;
-    printf("I am the philo number: %d\n", philo.id);
+    for (int i = 0; i < 20; i++)
+        pick_forks(&philo);
     return (NULL);
 }

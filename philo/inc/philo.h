@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:47:42 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/11 12:40:53 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:33:53 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_data
     int             num_of_meals;
     bool            infinite_meals;
     pthread_mutex_t *forks;
+    pthread_mutex_t print_mutex;
 }           t_data;
 
 typedef struct s_philo
@@ -52,6 +53,7 @@ bool        validate_args(char **argv, int argc, t_data *philo_data_init);
 bool	    ft_isnumeric_str(char *str);
 long int	ft_atol(const char *nptr);
 int         ft_strcmp(const char *s1, const char *s2);
-
+void        clean_rc_print(char *status, t_philo *philo);
+void        pick_forks(t_philo *philo);
 
 #endif
