@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:47:42 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/10 16:37:59 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:45:33 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,21 @@ typedef struct s_data
     int     time_to_die;
     int     time_to_eat;
     int     time_to_sleep;
-    int     num_of_philo;
     int     num_of_meals;
     bool    infinite_meals;
 }           t_data;
+
+typedef struct s_philo
+{
+    int             id;
+    int             meals;
+    int             last_meal;
+    pthread_t       thread;
+    pthread_mutex_t left_fork;
+    pthread_mutex_t right_fork;
+    pthread_mutex_t *print_mutex;
+    t_data          *philo_data;
+}                   t_philo;
 
 bool        validate_args(char **argv, int argc, t_data *philo_data_init);
 bool	    ft_isnumeric_str(char *str);
