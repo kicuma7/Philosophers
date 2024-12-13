@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:51:29 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/11 17:27:24 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:27:46 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void    *routine(void *philos)
     t_philo philo;
 
     philo = *(t_philo *)philos;
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 10; i++)
         pick_forks(&philo);
     return (NULL);
 }

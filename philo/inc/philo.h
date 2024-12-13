@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:47:42 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/11 16:33:53 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:40:52 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_data
     int             time_to_die;
     int             time_to_eat;
     int             time_to_sleep;
+    int             time_to_think;
     int             num_of_meals;
     bool            infinite_meals;
     pthread_mutex_t *forks;
