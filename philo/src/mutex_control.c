@@ -14,6 +14,7 @@
 
 static void philo_id_even(t_philo *philo);
 static void philo_id_odd(t_philo *philo);
+static void philo_routine(t_philo *philo);
 void        *check_death(void *philo);
 
 void clean_rc_print(char *status, t_philo *philo)
@@ -50,17 +51,7 @@ static void philo_id_even(t_philo *philo)
         clean_rc_print(FORK, philo);
         if (!pthread_mutex_lock(philo->right_fork))
         {
-            clean_rc_print(FORK, philo);
-            clean_rc_print(EAT, philo);
-            philo->data->last_meal_ms = current_time_in_ms();
-            usleep(philo->data->time_to_eat * 1000);
-            pthread_mutex_unlock(philo->right_fork);
-            pthread_mutex_unlock(philo->left_fork);
-            clean_rc_print(SLEEP, philo);
-            usleep(philo->data->time_to_sleep * 1000);
-            clean_rc_print(THINK, philo);
-            usleep(philo->data->time_to_think * 1000);
-            //pthread_create(&philo->monitor, NULL, check_death, philo);
+            philo_routine(philo); 
         }
         else
         {
@@ -77,17 +68,7 @@ static void philo_id_odd(t_philo *philo)
         clean_rc_print(FORK, philo);
         if (!pthread_mutex_lock(philo->left_fork))
         {
-            clean_rc_print(FORK, philo);
-            clean_rc_print(EAT, philo);
-            philo->data->last_meal_ms = current_time_in_ms();
-            usleep(philo->data->time_to_eat * 1000);
-            pthread_mutex_unlock(philo->right_fork);
-            pthread_mutex_unlock(philo->left_fork);
-            clean_rc_print(SLEEP, philo);
-            usleep(philo->data->time_to_sleep * 1000);
-            clean_rc_print(THINK, philo);
-            usleep(philo->data->time_to_think * 1000);
-            //pthread_create(&philo->monitor, NULL, check_death, philo);
+            philo_routine(philo);   
         }
         else
         {
@@ -96,7 +77,21 @@ static void philo_id_odd(t_philo *philo)
         }
     }
 }
-/*
+
+static void philo_routine(t_philo *philo)
+{
+    clean_rc_print(FORK, philo);
+    clean_rc_print(EAT, philo);
+    philo->data->last_meal_ms = current_time_in_ms();
+    usleep(philo->data->time_to_eat * 1000);
+    pthread_mutex_unlock(philo->right_fork);
+    pthread_mutex_unlock(philo->left_fork);
+    clean_rc_print(SLEEP, philo);
+    usleep(philo->data->time_to_sleep * 1000);
+    clean_rc_print(THINK, philo);
+    usleep(philo->data->time_to_think * 1000);
+}
+
 void    *check_death(void *philos)
 {
     long long   current_time;
@@ -105,11 +100,10 @@ void    *check_death(void *philos)
     philo = *(t_philo *)philos;
     current_time = current_time_in_ms();
     if (current_time - philo.data->last_meal_ms >= philo.data->time_to_die 
-        || philo.data->time_to_think <= 0); 
+        || philo.data->time_to_think < 0); 
     {
         clean_rc_print(DEAD, &philo);
         exit(EXIT_SUCCESS);
     }
     return (NULL);
 }
-*/
