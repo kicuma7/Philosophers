@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:51:29 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/13 12:27:46 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:37:03 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main(int ac, char **av)
         return (printf("%sError: %sInvalid arguments\n", BRED, WHITE));
     init_philos(&philos, &philo_data);
     i = 0;
+    philo_data.initial_time_ms = current_time_in_ms();
     while (i < philo_data.philo_nbr)
         pthread_create(&philos->thread, NULL, &routine, &philos[i++]);
     i = 0;
@@ -55,9 +56,15 @@ void    init_philos(t_philo **philos, t_data *data)
 static void    *routine(void *philos)
 {
     t_philo philo;
+    int     i;
 
+    i = 0;
     philo = *(t_philo *)philos;
-    for (int i = 0; i < 10; i++)
-        pick_forks(&philo);
+    if (philo.data->infinite_meals)
+        while (true)
+            pick_forks(&philo);
+    else
+        while (i++ < philo.data->num_of_meals)
+            pick_forks(&philo);
     return (NULL);
 }

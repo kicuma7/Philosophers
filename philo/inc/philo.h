@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:47:42 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/13 12:40:52 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:09:21 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <sys/time.h>
 
 # include "ansi_colors.h"
 
@@ -37,6 +38,8 @@ typedef struct s_data
     int             time_to_think;
     int             num_of_meals;
     bool            infinite_meals;
+    long long       initial_time_ms;
+    long long       last_time_ms;
     pthread_mutex_t *forks;
     pthread_mutex_t print_mutex;
 }           t_data;
@@ -56,5 +59,6 @@ long int	ft_atol(const char *nptr);
 int         ft_strcmp(const char *s1, const char *s2);
 void        clean_rc_print(char *status, t_philo *philo);
 void        pick_forks(t_philo *philo);
+long long   current_time_in_ms(void);
 
 #endif

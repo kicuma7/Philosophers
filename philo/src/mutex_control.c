@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:54:11 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/13 13:01:06 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:18:25 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,19 @@ static void philo_id_odd(t_philo *philo);
 
 void clean_rc_print(char *status, t_philo *philo)
 {
+    long    time_diff;
+    
     pthread_mutex_lock(&philo->data->print_mutex);
+    philo->data->last_time_ms = current_time_in_ms();
+    time_diff = philo->data->last_time_ms - philo->data->initial_time_ms;
     if (!ft_strcmp(status, FORK))
-        printf("%sphilo %d %s%s\n", BYELLOW, philo->id, FORK, COLOUR_RESET);
+        printf("%s[%ld] philo %d %s%s\n", BYELLOW, time_diff, philo->id, FORK, COLOUR_RESET);
     else if (!ft_strcmp(status, EAT))
-        printf("%sphilo %d %s%s\n", BGREEN, philo->id, EAT, COLOUR_RESET);
+        printf("%s[%ld] philo %d %s%s\n", BGREEN, time_diff, philo->id, EAT, COLOUR_RESET);
     else if (!ft_strcmp(status, SLEEP))
-        printf("%sphilo %d %s%s\n", BBLUE, philo->id, SLEEP, COLOUR_RESET);
+        printf("%s[%ld] philo %d %s%s\n", BBLUE, time_diff, philo->id, SLEEP, COLOUR_RESET);
     else if (!ft_strcmp(status, THINK))
-        printf("%sphilo %d %s%s\n", BGRAY, philo->id, THINK, COLOUR_RESET);
+        printf("%s[%ld] philo %d %s%s\n", BGRAY, time_diff, philo->id, THINK, COLOUR_RESET);
     pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
