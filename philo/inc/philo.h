@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 07:47:42 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/13 13:09:21 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:44:06 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_data
     int             num_of_meals;
     bool            infinite_meals;
     long long       initial_time_ms;
-    long long       last_time_ms;
+    long long       last_meal_ms;
     pthread_mutex_t *forks;
     pthread_mutex_t print_mutex;
 }           t_data;
@@ -48,6 +48,7 @@ typedef struct s_philo
 {
     int             id;
     pthread_t       thread;
+    pthread_t       monitor;
     pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
     t_data          *data;
