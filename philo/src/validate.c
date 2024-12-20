@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_input.c                                   :+:      :+:    :+:   */
+/*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:19:38 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/13 12:42:30 by jquicuma         ###   ########.fr       */
+/*   Created: 2024/12/20 05:52:57 by jquicuma          #+#    #+#             */
+/*   Updated: 2024/12/20 08:04:09 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-static void init_args(char **argv, t_data *philo_data_init)
+static void init_args(char **argv, t_philo_data *philo_data_init)
 {
     philo_data_init->philo_nbr = ft_atol(argv[1]);
     philo_data_init->time_to_die = ft_atol(argv[2]);
@@ -21,6 +21,8 @@ static void init_args(char **argv, t_data *philo_data_init)
     philo_data_init->time_to_think = philo_data_init->time_to_die -
                                      (philo_data_init->time_to_eat + philo_data_init->time_to_sleep);
     pthread_mutex_init(&philo_data_init->print_mutex, NULL);
+    if (philo_data_init->time_to_think < 0)
+        philo_data_init->time_to_think = 0;
     if (argv[5])
     {
         philo_data_init->num_of_meals = ft_atol(argv[5]);
@@ -33,7 +35,7 @@ static void init_args(char **argv, t_data *philo_data_init)
     }
 }
 
-bool validate_args(char **argv, int argc, t_data *philo_data_init)
+bool validate_args(char **argv, int argc, t_philo_data *philo_data_init)
 {
     int i;
     long int args_long;
