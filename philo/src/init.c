@@ -3,79 +3,85 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sedoming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/20 06:29:19 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/20 10:31:41 by jquicuma         ###   ########.fr       */
+/*   Created: 2024/11/27 15:49:16 by sedoming          #+#    #+#             */
+/*   Updated: 2024/12/03 11:55:23 by sedoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../includes/philo.h"
 
-#include "../inc/philo.h"
-
-static void     pick_first_fork_lock(t_philo *philo);
-static void    *routine(void *philos);
-
-void    init_philos(t_philo *philos, t_philo_data *data)
+void	data_init(t_data *data, t_global *global, char **av)
 {
-    int i;
-
-    i = 0;
-    while (i < data->philo_nbr)
-        pthread_mutex_init(&data->forks[i++], NULL);
-    data->initial_time_ms = current_time_in_ms();
-    i = 0;
-    while (i < data->philo_nbr)
-    {
-        philos[i].id = i + 1;
-        philos[i].data = data;
-        philos[i].left_fork = &data->forks[i];
-        philos[i].right_fork = &data->forks[(i + 1) % data->philo_nbr];
-        pthread_create(&philos[i].philo, NULL, &routine, &philos[i]);
-        i++;
-    }
-    i = 0;
-    while (i < data->philo_nbr)
-        pthread_join(philos[i++].philo, NULL);
+	memset(data, 0, sizeof(t_data));
+	data->philo_nbr = ft_atoi(av[1]);
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
+	global->control = 0;
+	if (av[5] != NULL)
+		data->total_ref = ft_atoi(av[5]);
+	else
+		data->total_ref = -1;
+	data->philo = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_nbr);
+	data->philosophers = (t_philo *)malloc(sizeof(t_philo) * data->philo_nbr);
+	data->garfos = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* data->philo_nbr);
+	mutex_init(data);
+	pthread_mutex_init(&global->mutex, NULL);
+	loop_create(data, global);
+	loop_join_and_destroy(data, global);
 }
 
-static void    *routine(void *philos)
+void	mutex_init(t_data *dados)
 {
-    t_philo philo;
-    int     i;
+	int	i;
 
-    philo = *(t_philo *)philos;
-    i = 0;
-    if (philo.data->infinite_meals)
-        while (true)
-            pick_first_fork_lock(&philo);
-    else
-        while (i++ < philo.data->num_of_meals)
-            pick_first_fork_lock(&philo);
-    return (NULL);
+	i = 0;
+	while (i < dados->philo_nbr)
+		pthread_mutex_init(&dados->garfos[i++], NULL);
 }
 
-static void pick_first_fork_lock(t_philo *philo)
+void	loop_create(t_data *dados, t_global *global)
 {
-    if ((philo->id % 2) == 0)
-    {
-        if (!pthread_mutex_lock(philo->left_fork))
-        {
-            mutex_print(FORK, philo);
-            if (!pthread_mutex_lock(philo->right_fork))
-                philo_routine(philo);
-            else
-                unlock_locks(philo->left_fork, philo->right_fork);
-        } 
-    }
-    else
-    {
-        if (!pthread_mutex_lock(philo->right_fork))
-        {
-            mutex_print(FORK, philo);
-            if (!pthread_mutex_lock(philo->left_fork))
-                philo_routine(philo);
-            else
-                unlock_locks(philo->left_fork, philo->right_fork);
-        }
-    }
+	int	i;
+
+	i = 0;
+	dados->time = gettimeofday_mills();
+	while (i < dados->philo_nbr)
+	{
+		memset(&dados->philosophers[i], 0, sizeof(t_philo));
+		dados->philosophers[i].time_init = gettimeofday_mills();
+		dados->philosophers[i].id = i + 1;
+		dados->philosophers->nbr_philo = dados->philo_nbr;
+		dados->philosophers[i].time_to_die = dados->time_to_die;
+		dados->philosophers[i].time_to_eat = dados->time_to_eat;
+		dados->philosophers[i].time_to_sleep = dados->time_to_sleep;
+		dados->philosophers[i].total_ref = dados->total_ref;
+		dados->philosophers[i].direito = &dados->garfos[i];
+		dados->philosophers[i].esquerdo = &dados->garfos[(i + 1)
+			% dados->philo_nbr];
+		dados->philosophers[i].last_meal_time = gettimeofday_mills();
+		dados->philosophers[i].global = global;
+		pthread_create(dados->philo + i, NULL, rotina, &dados->philosophers[i]);
+		i++;
+	}
+	pthread_create(&dados->monitor, NULL, monitor, dados->philosophers);
+}
+
+void	loop_join_and_destroy(t_data *dados, t_global *global)
+{
+	int	i;
+
+	i = 0;
+	while (i < dados->philo_nbr)
+		pthread_join(dados->philo[i++], NULL);
+	pthread_join(dados->monitor, NULL);
+	i = 0;
+	while (i < dados->philo_nbr)
+		pthread_mutex_destroy(&dados->garfos[i++]);
+	pthread_mutex_destroy(&global->mutex);
+	free(dados->philo);
+	free(dados->philosophers);
+	free(dados->garfos);
 }

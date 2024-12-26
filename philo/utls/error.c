@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sedoming <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/20 08:06:16 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/20 08:07:06 by jquicuma         ###   ########.fr       */
+/*   Created: 2024/11/27 15:51:46 by sedoming          #+#    #+#             */
+/*   Updated: 2024/11/27 15:52:07 by sedoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../includes/philo.h"
 
-#include "../inc/philo.h"
-
-long long current_time_in_ms(void)
+void	error_exit(char *str)
 {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return (long long)(tv.tv_sec) * 1000 + (tv.tv_usec / 1000);
+	printf("%s \n", str);
+	exit(1);
 }
