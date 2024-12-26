@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sedoming <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 15:49:39 by sedoming          #+#    #+#             */
-/*   Updated: 2024/11/27 19:21:31 by sedoming         ###   ########.fr       */
+/*   Created: 2024/11/27 15:49:39 by jquicuma          #+#    #+#             */
+/*   Updated: 2024/12/26 08:38:29 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../includes/philo.h"
 
 int	ft_atoi(char *str)
@@ -36,29 +37,22 @@ int	ft_atoi(char *str)
 	return (sinal * rest);
 }
 
-void	valid_args(char *str)
+void	validate_args(char *str)
 {
+	/*if (ft_atoi(str) == 12)
+		print_error_and_exit(ERR_VAL);*/
 	if (ft_atoi(str) == 0)
-		error_exit("error with characters ❌");
+		print_error_and_exit(ERROR_ARG);
 	while (*str != '\0')
 	{
 		if (*str == '+')
 			str++;
 		if (!(*str >= '0' && *str <= '9'))
-			error_exit("error with characters ❌");
+			print_error_and_exit(ERROR_ARG);
 		if ((*str >= 9 && *str <= 13) || *str == 32)
-			error_exit("error with characters ❌");
+			print_error_and_exit(ERROR_ARG);
 		if (*str == '-')
-			error_exit("error with characters ❌");
+			print_error_and_exit(ERROR_ARG);
 		str++;
 	}
-}
-
-long	gettimeofday_mills(void)
-{
-	struct timeval	tv;
-
-	if (gettimeofday(&tv, NULL))
-		return (0);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

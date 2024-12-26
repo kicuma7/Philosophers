@@ -9,7 +9,8 @@ SRCS = 	src/main.c 	\
 		src/init.c \
 		src/simulation.c \
 		src/pick_up_forks.c \
-		src/error.c  
+		src/error.c \
+		src/time.c
 
 OBJS = $(SRCS:.c=.o)
 

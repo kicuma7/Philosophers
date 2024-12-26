@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sedoming <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 15:49:01 by sedoming          #+#    #+#             */
-/*   Updated: 2024/11/27 16:31:21 by sedoming         ###   ########.fr       */
+/*   Created: 2024/11/27 15:49:01 by jquicuma          #+#    #+#             */
+/*   Updated: 2024/12/26 08:38:40 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../includes/philo.h"
 
 int	main(int ac, char **av)
@@ -21,15 +22,10 @@ int	main(int ac, char **av)
 	{
 		i = 0;
 		while (++i < ac)
-		{
-			if (ft_atoi(av[i]) == 12)
-				error_exit("value is long ❌");
-			valid_args(av[i]);
-		}
+			validate_args(av[i]);
 		data_init(&dados, &global, av);
 	}
 	else
-	{
-		error_exit("error with arguments ❌");
-	}
+		print_error_and_exit(ERROR_ARG);
+	return (0);
 }

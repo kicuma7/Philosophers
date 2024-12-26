@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   pick_up_forks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sedoming <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/30 15:38:17 by sedoming          #+#    #+#             */
-/*   Updated: 2024/12/03 11:56:10 by sedoming         ###   ########.fr       */
+/*   Created: 2024/11/30 15:38:17 by jquicuma          #+#    #+#             */
+/*   Updated: 2024/12/26 07:51:47 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../includes/philo.h"
 
 int	pick_up_forks(t_philo *philo)

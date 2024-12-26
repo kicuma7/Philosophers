@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sedoming <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 15:49:16 by sedoming          #+#    #+#             */
-/*   Updated: 2024/12/03 11:55:23 by sedoming         ###   ########.fr       */
+/*   Created: 2024/11/27 15:49:16 by jquicuma          #+#    #+#             */
+/*   Updated: 2024/12/26 07:51:14 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../includes/philo.h"
 
 void	data_init(t_data *data, t_global *global, char **av)

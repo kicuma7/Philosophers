@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sedoming <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 15:48:30 by sedoming          #+#    #+#             */
-/*   Updated: 2024/12/03 13:15:20 by sedoming         ###   ########.fr       */
+/*   Created: 2024/11/27 15:48:30 by jquicuma          #+#    #+#             */
+/*   Updated: 2024/12/26 08:38:16 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+
+# include "colors.h"
+
+# define ERROR_ARG "Invalid Arguments"
 
 typedef struct s_global
 {
@@ -63,8 +67,8 @@ typedef struct s_data
 }					t_data;
 
 int					ft_atoi(char *str);
-void				valid_args(char *str);
-void				error_exit(char *str);
+void				validate_args(char *str);
+void				print_error_and_exit(char *str);
 long				gettimeofday_mills(void);
 void				data_init(t_data *data, t_global *s_global, char **av);
 void				mutex_init(t_data *dados);

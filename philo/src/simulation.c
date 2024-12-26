@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sedoming <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 15:49:29 by sedoming          #+#    #+#             */
-/*   Updated: 2024/11/27 19:04:16 by sedoming         ###   ########.fr       */
+/*   Created: 2024/11/27 15:49:29 by jquicuma          #+#    #+#             */
+/*   Updated: 2024/12/26 07:51:53 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../includes/philo.h"
 
 void	print(t_philo *philo, char *str)
