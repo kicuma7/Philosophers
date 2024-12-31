@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.h                                           :+:      :+:    :+:   */
+/*   ansi_color_codes.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 07:46:47 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/26 08:16:58 by jquicuma         ###   ########.fr       */
+/*   Created: 2024/12/30 09:06:29 by jquicuma          #+#    #+#             */
+/*   Updated: 2024/12/30 09:13:34 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLORS_H
-# define COLORS_H
+#ifndef ANSI_COLOR_CODES_H
+# define ANSI_COLOR_CODES_H
 
 # define BLACK "\001\033[0;30m\002"
 # define RED "\001\033[0;31m\002"

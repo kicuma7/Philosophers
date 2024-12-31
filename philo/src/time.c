@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/26 07:44:57 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/26 07:45:41 by jquicuma         ###   ########.fr       */
+/*   Created: 2024/12/30 08:31:41 by jquicuma          #+#    #+#             */
+/*   Updated: 2024/12/30 10:01:14 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+# include "../inc/philo.h"
 
-long	gettimeofday_mills(void)
+long	current_time_in_ms(void)
 {
 	struct timeval	tv;
 
