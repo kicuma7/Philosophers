@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:58:15 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/31 21:09:25 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/01 08:13:09 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void verify_last_meal(t_philo *philo, long long actual_last_meal)
     {
         printf("\n\nPhilo Number: %d LM %lld\n\n", philo->id, actual_last_meal - philo->last_meal_abs_usec);
         mutex_print(DEAD, philo);
-        free_all(philo->data);
         exit(EXIT_FAILURE);
     }
     philo->last_meal_abs_usec = actual_last_meal;

@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 08:55:41 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/30 19:28:58 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/01 08:09:03 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static void init_args(char **argv, t_philo_data *philo_data_init)
     philo_data_init->time_to_die = ft_atol(argv[2]);
     philo_data_init->time_to_eat = ft_atol(argv[3]);
     philo_data_init->time_to_sleep = ft_atol(argv[4]);
+    philo_data_init->someone_died = false;
     pthread_mutex_init(&philo_data_init->print_mutex, NULL);
+    pthread_mutex_init(&philo_data_init->death_mutex, NULL);
     if (argv[5])
     {
         philo_data_init->num_of_meals = ft_atol(argv[5]);

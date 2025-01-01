@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:18:36 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/30 19:42:18 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/01 08:12:40 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ int main(int argc, char **argv)
         return (0);
     }
     init_philos(philos, &data);
-    free_all(&data);
+    free_all(&data, philos);
     return (0);
 }

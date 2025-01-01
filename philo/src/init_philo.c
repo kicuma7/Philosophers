@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:29:54 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/30 19:39:45 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/01 08:04:01 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ static void *routine(void *philos)
     philo = *(t_philo *)philos;
     i = 0;
     if (philo.data->infinite_meals)
-        while (philo.data->infinite_meals)
+        while (!check_death(&philo))
             pick_first_fork_lock(&philo);
     else
-        while (i++ < philo.data->num_of_meals)
+        while (i++ < philo.data->num_of_meals && !check_death(&philo))
             pick_first_fork_lock(&philo);
     return (NULL);
 }
