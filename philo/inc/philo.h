@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 08:51:41 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/30 19:28:10 by jquicuma         ###   ########.fr       */
+/*   Updated: 2024/12/31 22:11:14 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,5 @@ void	unlock_locks(pthread_mutex_t *left_fork, pthread_mutex_t *right_fork);
 void init_philos(t_philo *philos, t_philo_data *data);
 void philo_routine(t_philo *philo);
 void mutex_print(char *status, t_philo *philo);
-//bool check_death(t_philo *philo);
-//void mark_death(t_philo *philo);
-//void *death_monitor(void *arg);
 
 #endif
