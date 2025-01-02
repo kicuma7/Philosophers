@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:29:54 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/01 08:04:01 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:51:14 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ static void    *routine(void *philos);
 void init_philos(t_philo *philos, t_philo_data *data)
 {
     int         i;
+    pthread_t   mon;
 
     i = 0;
     while (i < data->philo_nbr)
         pthread_mutex_init(&data->forks[i++], NULL);
+    data->someone_died = false;
     data->initial_time_ms = current_time_in_ms();
     i = 0;
     while (i < data->philo_nbr)
@@ -36,23 +38,25 @@ void init_philos(t_philo *philos, t_philo_data *data)
         i++;
     }
     i = 0;
+    pthread_create(&mon, NULL, monitor, &philos[0]);
     while (i < data->philo_nbr)
         pthread_join(philos[i++].philo, NULL);
+    pthread_join(mon, NULL);
 }
 
 static void *routine(void *philos)
 {
-    t_philo philo;
+    t_philo *philo;
     int     i;
 
-    philo = *(t_philo *)philos;
+    philo = (t_philo *)philos;
     i = 0;
-    if (philo.data->infinite_meals)
-        while (!check_death(&philo))
-            pick_first_fork_lock(&philo);
+    if (philo->data->infinite_meals)
+        while (!check_death(philo))
+            pick_first_fork_lock(philo);
     else
-        while (i++ < philo.data->num_of_meals && !check_death(&philo))
-            pick_first_fork_lock(&philo);
+        while (i++ < philo->data->num_of_meals && !check_death(philo))
+            pick_first_fork_lock(philo);
     return (NULL);
 }
 

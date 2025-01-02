@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 08:51:41 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/01 08:12:01 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:51:24 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ void philo_routine(t_philo *philo);
 void mutex_print(char *status, t_philo *philo);
 bool check_death(t_philo *philo);
 void mark_death(t_philo *philo);
+void *death_monitor(void *arg);
+void	*monitor(void *args);
 
 #endif
