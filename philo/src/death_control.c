@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 10:56:53 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/02 12:52:02 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:44:32 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,31 @@ void *death_monitor(void *arg)
     return (NULL);
 }
 
-void	*monitor(void *args)
+void *monitor(void *args)
 {
-	t_philo	*philo;
-	int		i;
+    t_philo *philos = (t_philo *)args;
+    t_philo_data *data = philos[0].data;
+    int i;
 
-	philo = (t_philo *)args;
-	while (1)
-	{
-		i = 0;
-		while (i < philo->data->philo_nbr)
-		{
-			usleep(1000);
-			if ((current_time_in_ms()
-					- philo->last_meal_abs_usec) > philo->data->time_to_die)
-			{
-				mark_death(&philo[i]);
-				philo->data->someone_died = true;
-				return (NULL);
-			}
-			i++;
-		}
-		usleep(1000);
-	}
+    while (true)
+    {
+        i = 0;
+        while (i < data->philo_nbr)
+        {
+            pthread_mutex_lock(&philos[i].meal_mutex);
+            if ((current_time_in_ms() - philos[i].last_meal_abs_usec) > data->time_to_die)
+            {
+                pthread_mutex_lock(&data->print_mutex);
+                data->someone_died = true;
+                printf("%s[%lld] philo %d %s%s\n", BRED, current_time_in_ms() - data->initial_time_ms, philos[i].id, DEAD, COLOUR_RESET);
+                pthread_mutex_unlock(&data->print_mutex);
+                pthread_mutex_unlock(&philos[i].meal_mutex);
+                return (NULL); // Finaliza a thread monitora
+            }
+            pthread_mutex_unlock(&philos[i].meal_mutex);
+            i++;
+        }
+        usleep(1000); // Pequeno atraso para evitar consumo excessivo de CPU
+    }
+    return (NULL);
 }

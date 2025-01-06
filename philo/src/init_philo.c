@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:29:54 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/02 12:51:14 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:28:49 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void    *routine(void *philos);
 
 void init_philos(t_philo *philos, t_philo_data *data)
 {
+    pthread_t   monitor_thread;
     int         i;
-    pthread_t   mon;
 
     i = 0;
     while (i < data->philo_nbr)
@@ -38,10 +38,10 @@ void init_philos(t_philo *philos, t_philo_data *data)
         i++;
     }
     i = 0;
-    pthread_create(&mon, NULL, monitor, &philos[0]);
+    pthread_create(&monitor_thread, NULL, death_monitor, philos);
     while (i < data->philo_nbr)
         pthread_join(philos[i++].philo, NULL);
-    pthread_join(mon, NULL);
+    pthread_join(monitor_thread, NULL);
 }
 
 static void *routine(void *philos)
@@ -75,6 +75,7 @@ static void pick_first_fork_lock(t_philo *philo)
     }
     else
     {
+        usleep(1000);
         if (!pthread_mutex_lock(philo->right_fork))
         {
             mutex_print(FORK, philo);
