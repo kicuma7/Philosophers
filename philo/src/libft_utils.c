@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:05:21 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/06 14:23:13 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:37:04 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,32 +79,27 @@ int	ft_strcmp(const char *s1, const char *s2)
 void	mutex_print(char *status, t_philo *philo)
 {
 	static bool	print_death = false;
-	long		time_diff;
+	long		time;
 
 	pthread_mutex_lock(&philo->data->print_mutex);
-	time_diff = current_time_in_ms() - philo->data->initial_time_ms;
+	time = current_time_in_ms() - philo->data->initial_time_ms;
 	if (!check_death(philo))
 	{
 		if (!ft_strcmp(status, FORK))
-			printf("%s[%ld] philo %d %s%s\n", BYELLOW, time_diff, philo->id,
-				FORK, COLOUR_RESET);
+			printf("%s[%ld] philo %d %s%s\n", BYELLOW, time, philo->id, FORK,
+				R);
 		else if (!ft_strcmp(status, EAT))
-			printf("%s[%ld] philo %d %s%s\n", BGREEN, time_diff, philo->id, EAT,
-				COLOUR_RESET);
+			printf("%s[%ld] philo %d %s%s\n", BGREEN, time, philo->id, EAT, R);
 		else if (!ft_strcmp(status, SLEEP))
-			printf("%s[%ld] philo %d %s%s\n", BBLUE, time_diff, philo->id,
-				SLEEP, COLOUR_RESET);
+			printf("%s[%ld] philo %d %s%s\n", BBLUE, time, philo->id, SLEEP, R);
 		else if (!ft_strcmp(status, THINK))
-			printf("%s[%ld] philo %d %s%s\n", BGRAY, time_diff, philo->id,
-				THINK, COLOUR_RESET);
+			printf("%s[%ld] philo %d %s%s\n", BGRAY, time, philo->id, THINK, R);
 		else if (!ft_strcmp(status, DEAD))
-			printf("%s[%ld] philo %d %s%s\n", BRED, time_diff, philo->id, DEAD,
-				COLOUR_RESET);
+			printf("%s[%ld] philo %d %s%s\n", BRED, time, philo->id, DEAD, R);
 	}
 	else if (!print_death)
 	{
-		printf("%s[%ld] philo %d %s%s\n", BRED, time_diff, philo->id, DEAD,
-			COLOUR_RESET);
+		printf("%s[%ld] philo %d %s%s\n", BRED, time, philo->id, DEAD, R);
 		print_death = true;
 	}
 	pthread_mutex_unlock(&philo->data->print_mutex);
