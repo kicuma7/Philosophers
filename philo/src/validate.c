@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 08:55:41 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/01 08:09:03 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:02:26 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,10 @@ bool validate_args(char **argv, int argc, t_philo_data *philo_data_init)
             return (false);
     }
     init_args(argv, philo_data_init);
+    if (philo_data_init->philo_nbr <= 0 
+        || philo_data_init->time_to_die <= 0 
+        || philo_data_init->time_to_eat <= 0
+        || philo_data_init->time_to_sleep <= 0)
+        return (false);
     return (true);
 }
