@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 10:56:53 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/06 14:35:22 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:44:51 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	*death_monitor(void *arg)
 		while (i < philos[0].data->philo_nbr)
 		{
 			current_time = current_time_in_ms();
-			if ((current_time
-					- philos[i].last_meal_abs_usec) >= philos[i].data->time_to_die)
+			if ((current_time - philos[i].last_meal_abs_usec)
+				>= philos[i].data->time_to_die)
 			{
 				mark_death(&philos[i]);
 				return (NULL);
