@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 08:51:41 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/06 14:25:15 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:10:13 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_philo_data
 	long long		initial_time_ms;
 	bool			someone_died;
 	pthread_mutex_t	death_mutex;
+	bool			meals_rest;
 }					t_philo_data;
 
 typedef struct s_philo

@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 10:56:53 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/06 14:44:51 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:18:07 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	*death_monitor(void *arg)
 				return (NULL);
 			}
 			i++;
+			if (!philos->data->meals_rest)
+				return (NULL);
 		}
 		usleep(1000);
 	}
