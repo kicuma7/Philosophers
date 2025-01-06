@@ -6,11 +6,11 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 08:31:41 by jquicuma          #+#    #+#             */
-/*   Updated: 2024/12/30 10:01:14 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:23:59 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/philo.h"
+#include "../inc/philo.h"
 
 long	current_time_in_ms(void)
 {
