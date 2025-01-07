@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:29:54 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/06 15:12:18 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:26:30 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static void	pick_first_fork_lock(t_philo *philo)
 	{
 		if (!pthread_mutex_lock(philo->left_fork))
 		{
+			if (check_death(philo))
+				return ;
 			mutex_print(FORK, philo);
 			if (!pthread_mutex_lock(philo->right_fork))
 				philo_routine(philo);
@@ -85,6 +87,8 @@ static void	pick_first_fork_lock(t_philo *philo)
 		usleep(1000);
 		if (!pthread_mutex_lock(philo->right_fork))
 		{
+			if (check_death(philo))
+				return ;
 			mutex_print(FORK, philo);
 			if (!pthread_mutex_lock(philo->left_fork))
 				philo_routine(philo);

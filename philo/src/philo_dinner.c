@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:58:15 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/06 14:23:54 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:38:40 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	philo_routine(t_philo *philo)
 		return ;
 	}
 	mutex_print(FORK, philo);
+	if (check_death(philo))
+		return ;
 	mutex_print(EAT, philo);
 	philo->last_meal_abs_usec = current_time_in_ms();
 	usleep(philo->data->time_to_eat * 1000);

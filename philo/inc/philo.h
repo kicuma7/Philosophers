@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 08:51:41 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/06 15:10:13 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:46:30 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+#include <stdatomic.h>
 
 # define EAT "is eating"
 # define SLEEP "is sleeping"
@@ -42,9 +43,9 @@ typedef struct s_philo_data
 	bool			infinite_meals;
 	pthread_mutex_t	print_mutex;
 	long long		initial_time_ms;
-	bool			someone_died;
+	atomic_bool		someone_died;
 	pthread_mutex_t	death_mutex;
-	bool			meals_rest;
+	atomic_bool			meals_rest;
 }					t_philo_data;
 
 typedef struct s_philo
@@ -54,7 +55,7 @@ typedef struct s_philo
 	t_philo_data	*data;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	long long		last_meal_abs_usec;
+	_Atomic long	last_meal_abs_usec;
 	pthread_mutex_t	meal_mutex;
 }					t_philo;
 
