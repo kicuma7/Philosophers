@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 10:56:53 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/11 13:28:57 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/11 14:45:59 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,23 @@ void	*death_monitor(void *arg)
 void	*death_monitor(void *args)
 {
 	t_philo			*philos;
-	t_philo_data	*data;
 	int				i;
 
 	philos = (t_philo *)args;
-	data = philos[0].data;
 	while (true)
 	{
 		i = 0;
-		while (i < data->philo_nbr)
+		while (i < philos[0].data->philo_nbr)
 		{
 			if ((current_time_in_ms()
-					- philos[i].last_meal_abs_usec) > data->time_to_die)
+					- philos[i].last_meal_abs_usec) > philos[0].data->time_to_die)
 			{
-				data->someone_died = true;
-				mutex_print(DEAD, &philos[i], BRED);
-				pthread_mutex_unlock(&data->print_mutex);
+				if (philos[0].data->meals_rest)
+				{
+					philos[0].data->someone_died = true;
+					mutex_print(DEAD, &philos[i], BRED);
+					pthread_mutex_unlock(&philos[0].data->print_mutex);
+				}
 				return (NULL);
 			}
 			i++;
