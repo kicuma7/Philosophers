@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:33:46 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/07 12:53:58 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/11 13:09:44 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	free_all(t_philo_data *data, t_philo *philo)
 	{
 		pthread_mutex_destroy(&data->forks[i++]);
 	}
-	pthread_mutex_destroy(&data->print_mutex);
-	pthread_mutex_destroy(&data->death_mutex);
 }
 
 void	unlock_locks(pthread_mutex_t *left_fork, pthread_mutex_t *right_fork)

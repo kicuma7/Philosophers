@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 10:56:53 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/11 12:18:14 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/11 13:28:57 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,19 @@
 bool	check_death(t_philo *philo)
 {
 	bool	died;
-
-//	pthread_mutex_lock(&philo->data->death_mutex);
+	
 	died = philo->data->someone_died;
-//	pthread_mutex_unlock(&philo->data->death_mutex);
 	return (died);
 }
-
+/*
 void	mark_death(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->death_mutex);
+	pthread_mutex_lock(&philo->data-> );
 	philo->data->someone_died = true;
-	pthread_mutex_unlock(&philo->data->death_mutex);
+	pthread_mutex_unlock(&philo->data->death_ mutex);
 	mutex_print(DEAD, philo, BRED);
 }
+*/
 
 /*
 void	*death_monitor(void *arg)
@@ -73,20 +72,14 @@ void	*death_monitor(void *args)
 		i = 0;
 		while (i < data->philo_nbr)
 		{
-			//pthread_mutex_lock(&philos[i].meal_mutex);
 			if ((current_time_in_ms()
 					- philos[i].last_meal_abs_usec) > data->time_to_die)
 			{
-				//pthread_mutex_lock(&data->print_mutex);
 				data->someone_died = true;
 				mutex_print(DEAD, &philos[i], BRED);
+				pthread_mutex_unlock(&data->print_mutex);
 				return (NULL);
-				//printf("%s[%lld] philo %d %s%s\n", BRED, current_time_in_ms()
-				//	- data->initial_time_ms, philos[i].id, DEAD, R);
-				//pthread_mutex_unlock(&data->print_mutex);
-				//pthread_mutex_unlock(&philos[i].meal_mutex);
 			}
-			//pthread_mutex_unlock(&philos[i].meal_mutex);
 			i++;
 		}
 		usleep(1000);

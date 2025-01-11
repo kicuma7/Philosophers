@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:29:54 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/11 12:17:26 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/11 13:25:36 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	init_philos(t_philo *philos, t_philo_data *data)
 		philos[i].data = data;
 		philos[i].last_meal_abs_usec = current_time_in_ms();
 		philos[i].left_fork = &data->forks[i];
-		pthread_mutex_init(&philos[i].meal_mutex, NULL);
 		philos[i].right_fork = &data->forks[(i + 1) % data->philo_nbr];
 		pthread_create(&philos[i].philo, NULL, &routine, &philos[i]);
 		i++;
@@ -74,7 +73,7 @@ static void	pick_first_fork_lock(t_philo *philo)
 		if (!pthread_mutex_lock(philo->left_fork))
 		{
 			if (check_death(philo))
-				return ;
+				return (unlock_locks(philo->left_fork, NULL));
 			mutex_print(FORK, philo, BYELLOW);
 			if (!pthread_mutex_lock(philo->right_fork))
 				philo_routine(philo);
@@ -88,7 +87,7 @@ static void	pick_first_fork_lock(t_philo *philo)
 		if (!pthread_mutex_lock(philo->right_fork))
 		{
 			if (check_death(philo))
-				return ;
+				return (unlock_locks(philo->right_fork, NULL));
 			mutex_print(FORK, philo, BYELLOW);
 			if (!pthread_mutex_lock(philo->left_fork))
 				philo_routine(philo);

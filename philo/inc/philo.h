@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 08:51:41 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/11 12:16:54 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/11 13:06:32 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_philo_data
 	pthread_mutex_t	print_mutex;
 	long long		initial_time_ms;
 	atomic_bool		someone_died;
-	pthread_mutex_t	death_mutex;
 	atomic_bool			meals_rest;
 }					t_philo_data;
 
@@ -56,7 +55,6 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	_Atomic long	last_meal_abs_usec;
-	pthread_mutex_t	meal_mutex;
 }					t_philo;
 
 long				current_time_in_ms(void);
