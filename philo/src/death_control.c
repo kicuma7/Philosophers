@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 10:56:53 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/07 12:38:40 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/11 12:18:14 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	mark_death(t_philo *philo)
 	pthread_mutex_lock(&philo->data->death_mutex);
 	philo->data->someone_died = true;
 	pthread_mutex_unlock(&philo->data->death_mutex);
-	mutex_print(DEAD, philo);
+	mutex_print(DEAD, philo, BRED);
 }
 
 /*
@@ -79,7 +79,7 @@ void	*death_monitor(void *args)
 			{
 				//pthread_mutex_lock(&data->print_mutex);
 				data->someone_died = true;
-				mutex_print(DEAD, &philos[i]);
+				mutex_print(DEAD, &philos[i], BRED);
 				return (NULL);
 				//printf("%s[%lld] philo %d %s%s\n", BRED, current_time_in_ms()
 				//	- data->initial_time_ms, philos[i].id, DEAD, R);

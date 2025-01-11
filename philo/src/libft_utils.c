@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:05:21 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/07 12:22:29 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/11 12:19:54 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-void	mutex_print(char *status, t_philo *philo)
+void	mutex_print(char *status, t_philo *philo, char *color)
 {
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("[%lld] [%d] [%s]\n",current_time_in_ms() - philo->data->initial_time_ms, \
-	philo->id, status);
+	printf("%s%lld philo %d %s%s\n", color,current_time_in_ms() - philo->data->initial_time_ms, \
+	philo->id, status, R);
 	if (philo->data->someone_died != true)
 		pthread_mutex_unlock(&philo->data->print_mutex);
 }
