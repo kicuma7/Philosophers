@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:29:54 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/11 13:25:36 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:19:47 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	pick_first_fork_lock(t_philo *philo);
 static void	*routine(void *philos);
+static void	start_routine_odd(t_philo *philo);
+static void	start_routine_even(t_philo *philo);
 
 void	init_philos(t_philo *philos, t_philo_data *data)
 {
@@ -70,29 +72,39 @@ static void	pick_first_fork_lock(t_philo *philo)
 {
 	if ((philo->id % 2) == 0)
 	{
-		if (!pthread_mutex_lock(philo->left_fork))
-		{
-			if (check_death(philo))
-				return (unlock_locks(philo->left_fork, NULL));
-			mutex_print(FORK, philo, BYELLOW);
-			if (!pthread_mutex_lock(philo->right_fork))
-				philo_routine(philo);
-			else
-				unlock_locks(philo->left_fork, philo->right_fork);
-		}
+		start_routine_even(philo);
 	}
 	else
 	{
 		usleep(1000);
+		start_routine_odd(philo);
+	}
+}
+
+static void	start_routine_odd(t_philo *philo)
+{
+	if (!pthread_mutex_lock(philo->right_fork))
+	{
+		if (check_death(philo))
+			return (unlock_locks(philo->right_fork, NULL));
+		mutex_print(FORK, philo, BYELLOW);
+		if (!pthread_mutex_lock(philo->left_fork))
+			philo_routine(philo);
+		else
+			unlock_locks(philo->left_fork, philo->right_fork);
+	}
+}
+
+static void	start_routine_even(t_philo *philo)
+{
+	if (!pthread_mutex_lock(philo->left_fork))
+	{
+		if (check_death(philo))
+			return (unlock_locks(philo->left_fork, NULL));
+		mutex_print(FORK, philo, BYELLOW);
 		if (!pthread_mutex_lock(philo->right_fork))
-		{
-			if (check_death(philo))
-				return (unlock_locks(philo->right_fork, NULL));
-			mutex_print(FORK, philo, BYELLOW);
-			if (!pthread_mutex_lock(philo->left_fork))
-				philo_routine(philo);
-			else
-				unlock_locks(philo->left_fork, philo->right_fork);
-		}
+			philo_routine(philo);
+		else
+			unlock_locks(philo->left_fork, philo->right_fork);
 	}
 }

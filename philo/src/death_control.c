@@ -6,7 +6,7 @@
 /*   By: jquicuma <jquicuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 10:56:53 by jquicuma          #+#    #+#             */
-/*   Updated: 2025/01/11 14:45:59 by jquicuma         ###   ########.fr       */
+/*   Updated: 2025/01/11 14:59:19 by jquicuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,49 +15,10 @@
 bool	check_death(t_philo *philo)
 {
 	bool	died;
-	
+
 	died = philo->data->someone_died;
 	return (died);
 }
-/*
-void	mark_death(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->data-> );
-	philo->data->someone_died = true;
-	pthread_mutex_unlock(&philo->data->death_ mutex);
-	mutex_print(DEAD, philo, BRED);
-}
-*/
-
-/*
-void	*death_monitor(void *arg)
-{
-	t_philo		*philos;
-	int			i;
-	long long	current_time;
-
-	philos = (t_philo *)arg;
-	while (!check_death(&philos[0]))
-	{
-		i = 0;
-		while (i < philos[0].data->philo_nbr)
-		{
-			current_time = current_time_in_ms();
-			if ((current_time - philos[i].last_meal_abs_usec)
-				>= philos[i].data->time_to_die)
-			{
-				mark_death(&philos[i]);
-				return (NULL);
-			}
-			i++;
-			if (!philos->data->meals_rest)
-				return (NULL);
-		}
-		usleep(1000);
-	}
-	return (NULL);
-}
-*/
 
 void	*death_monitor(void *args)
 {
@@ -70,8 +31,8 @@ void	*death_monitor(void *args)
 		i = 0;
 		while (i < philos[0].data->philo_nbr)
 		{
-			if ((current_time_in_ms()
-					- philos[i].last_meal_abs_usec) > philos[0].data->time_to_die)
+			if ((current_time_in_ms() \
+			- philos[i].last_meal_abs_usec) > philos[0].data->time_to_die)
 			{
 				if (philos[0].data->meals_rest)
 				{
